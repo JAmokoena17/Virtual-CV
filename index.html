@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Virtual CV</title>
+</head>
+<body>
+    <Main>
+        <section class="left">
+            <div class="left-image">
+                <img src="./IMG-20250320-WA0012.jpg" alt="Professional Photo" id="profileImage" width="300" height="200">
+            </div>
+            <div class="personal">
+                <ul>
+                    <li><i class="fa-solid fa-user-check"></i> Student</li>
+                    <li><i class="fa-solid fa-house-user"></i> Gauteng,Randfontein</li>
+                    <li><i class="fa-solid fa-envelope-circle-check"></i> ajmokoena17@gmail.com</li>
+                    <li><i class="fa-solid fa-phone"></i> 0656434504</li>
+                </ul>
+                <hr>
+            </div>
+            <div class="skills">
+                <h3><i class="fa-solid fa-computer"></i>Skills</h3>
+                <ul id="skillsList">
+                    <li><p>Java</p><progress max="100" value="60"></progress></li>
+                    <li><p>C#</p><progress max="100" value="80"></progress></li>
+                    <li><p>C++</p><progress max="100" value="60"></progress></li>
+                    <li><p>Python</p><progress max="100" value="70"></progress></li>
+                    <li><p>HTML</p><progress max="100" value="90"></progress></li>
+                    <li><p>CSS</p><progress max="100" value="90"></progress></li>
+                    <li><p>JavaScript</p><progress max="100" value="40"></progress></li>
+                </ul>
+            </div>
+            <div class="laguages">
+                <h3><i class="fa-solid fa-language"></i>Languages</h3>
+                <ul id="languagesList">
+                    <li><p>English</p></li>
+                    <li><p>Sesotho</p></li>
+                    <li><p>Isizulu</p></li>
+                    <li><p>Afrikaans</p><progress max="100" value="50"></progress></li>
+                </ul>
+            </div>
+        </section>
+        <section class="right">
+            <div class="about-me">
+                <h3><i class="fa-solid fa-eject"></i>ABOUT ME</h3>
+                <p id="aboutText">Final-year IT student with a passion for collaborative coding and continuous learning. I thrive in team environments where knowledge sharing fuels innovation, while my self-driven research habits keep me at the forefront of technology. Hard work and curiosity define my approach to every challenge.</p>
+            </div>
+
+            <div class="experience">
+                <h3><i class="fa-solid fa-desktop"></i>EXPERIENCE</h3>
+                <ul id="experienceList">
+                    <li>*Built functional applications in Java, Python, and JavaScript</li>
+                    <li>*Collaborated on team coding projects using Git</li>
+                    <li>*Developed database systems and web applications</li>
+                </ul>
+            </div>
+            <div class="education">
+                <h3><i class="fa-solid fa-book"></i>EDUCATION</h3>
+                <div id="educationContent">
+                    <h3>Bachelor of Science in Information Technology</h3>
+                    <p class="institution">North-West University (NWU)</p>
+                    <p class="duration">2022 -2024 (Present -Final Year)</p>
+                </div>
+            </div>
+            <section class="projects">
+                <h3>PROJECTS</h3>
+                <div id="projectsContainer">
+                    <div class="project-card">
+                        <h3>Portfolio Project</h3>
+                        <p>A responsive personal portfolio website showcasing my skills and academic projects.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/JAmokoena17/html-portfolio.git" target="_blank" rel="noopener noreferrer">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Roots Online Butchery (Collaborative)</h3>
+                        <p>E-commerce platform for meat orders with client interface and admin dashboard.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Thuso-Ndou/rootsonlinebutchery.git" target="_blank" rel="noopener noreferrer">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        
+                    </div>
+                </div>
+            </section>
+        </section>
+    </Main>
+    <footer>
+        <p id="copyright"></p>
+    </footer>
+
+    <script>
+        // Auto-update copyright year
+        document.getElementById('copyright').textContent = `© ${new Date().getFullYear()} Mr Mokoena - All Rights Reserved`;
+
+        // Image click handler for potential enlargement
+        document.getElementById('profileImage').addEventListener('click', function() {
+            this.classList.toggle('enlarged');
+            console.log('Profile image clicked - could add modal here');
+        });
+
+        // Dynamic skill bars animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const skills = document.querySelectorAll('#skillsList progress');
+            skills.forEach(skill => {
+                const targetValue = skill.value;
+                skill.value = 0;
+                let current = 0;
+                const interval = setInterval(() => {
+                    if (current >= targetValue) {
+                        clearInterval(interval);
+                    } else {
+                        current += 2;
+                        skill.value = current;
+                    }
+                }, 20);
+            });
+        });
+
+        // Project card interaction
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Print button functionality (could add button in footer)
+        function printCV() {
+            window.print();
+        }
+
+        // Theme switcher (could add toggle button)
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
+</body>
+</html>
